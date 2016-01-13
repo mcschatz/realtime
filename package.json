@@ -1,41 +1,29 @@
 {
   "name": "realtime",
   "version": "1.0.0",
-  "description": "Websocket project, making a poll",
-  "main": "index.js",
+  "description": "websockets, realtime",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "lodash": "^4.0.0",
+    "socket.io": "^1.4.4"
+  },
+  "devDependencies": {},
   "scripts": {
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "build": "./node_modules/webpack/bin/webpack.js",
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register",
-    "lint": "eslint lib"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mcschatz/realtime.git"
+    "url": "git+https://github.com/mcschatz/realtime.git"
   },
+  "keywords": [
+    "realtime"
+  ],
   "author": "Mimi Schatz",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/mcschatz/realtime/issues"
   },
-  "homepage": "https://github.com/mcschatz/realtime",
-  "devDependencies": {
-    "babel": "^5.8.3",
-    "babel-core": "^5.7.4",
-    "babel-eslint": "^4.1.6",
-    "babel-loader": "^5.3.2",
-    "babel-polyfill": "^6.3.14",
-    "chai": "^3.2.0",
-    "css-loader": "^0.15.5",
-    "eslint": "^1.10.3",
-    "mocha": "^2.2.5",
-    "mocha-loader": "^0.7.1",
-    "node-libs-browser": "^0.5.2",
-    "node-sass": "^3.2.0",
-    "sass-loader": "^1.0.2",
-    "style-loader": "^0.12.3",
-    "wallaby-webpack": "0.0.10",
-    "webpack": "^1.10.1",
-    "webpack-dev-server": "^1.10.1"
-  }
+  "homepage": "https://github.com/mcschatz/realtime#readme"
 }
