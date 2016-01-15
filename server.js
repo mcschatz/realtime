@@ -1,15 +1,15 @@
 const http = require('http');
 const express = require('express');
-
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
+
+app.locals.title = 'Real Time';
 
 app.get('/', function (req, res){
   res.sendFile(__dirname + '/public/index.html');
 });
-
-const port = process.env.PORT || 3000;
 
 const server = http.createServer(app)
                  .listen(port, function () {
