@@ -1,20 +1,25 @@
-const http = require('http');
+const http    = require('http');
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
+const app     = express();
+const port    = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
 app.locals.title = 'Real Time';
 
+app.set('view engine', 'jade');
+
 app.get('/', function (req, res){
-  res.sendFile(__dirname + '/public/index.html');
+  res.render('index');
 });
 
 const server = http.createServer(app)
-                 .listen(port, function () {
-                    console.log('Listening on port ' + port + '.');
-                  });
+
+if(!module.parent) {
+  server.listen(port, () => {
+    console.log(`${app.locals.title} is running on port ${port}.`);
+  });
+}
 
 const socketIo = require('socket.io');
 const io = socketIo(server);
@@ -30,4 +35,4 @@ io.on('connection', function (socket) {
   });
 });
 
-module.exports = server;
+module.exports = app;
