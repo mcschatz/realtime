@@ -48,16 +48,35 @@ describe('Server', () => {
 
   });
 
-  describe('POST /responses', () => {
+  describe('POST /', () => {
+
+    beforeEach(() => {
+      app.locals.responses = {};
+    });
 
     it('should not return 404', (done) => {
-      this.request.post('/responses', (error, response) => {
+      this.request.post('/', (error, response) => {
         if (error) { done(error); }
         assert.notEqual(response.statusCode, 404);
         done();
       });
     });
 
+    it('should recieve and store data', (done) => {
+      var poll = {
+        poll: {
+          question: "Does this work?",
+          answers: ["a", "b"]
+        }
+      };
+
+      this.request.post('/', { form: poll }, (error, response) => {
+        if (error) { done(error); }
+        var pollCount = Object.keys(app.database).length;
+        assert.equal(pollCount, 1, 'Expected 1 poll, found ${pollCount}');
+        done();
+      });
+    });
   });
 
 });

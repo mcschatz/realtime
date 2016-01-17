@@ -4,6 +4,7 @@
   "description": "websockets, realtime",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "lodash": "^4.0.0",
