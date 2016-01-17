@@ -7,10 +7,16 @@ app.use(express.static('public'));
 
 app.locals.title = 'Real Time';
 
+app.locals.responses = {};
+
 app.set('view engine', 'jade');
 
 app.get('/', function (req, res){
   res.render('index');
+});
+
+app.post('/responses', (request, response) => {
+  response.sendStatus(201);
 });
 
 const server = http.createServer(app)
