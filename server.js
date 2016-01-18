@@ -21,7 +21,10 @@ app.get('/', function (req, res){
   res.render('index');
 });
 
-app.post('/', (request, response) => {
+app.post('/', function(request, response) {
+  if (!request.body.poll) {
+      return response.status(500).send("Error with Poll data.")
+    }
   var poll = database.createPoll(request.body.poll);
   response.sendStatus(201);
 });
