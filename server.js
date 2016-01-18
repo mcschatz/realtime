@@ -1,20 +1,40 @@
-const http = require('http');
-const express = require('express');
-
-const app = express();
+const http       = require('http');
+const express    = require('express');
+const app        = express();
+const port       = process.env.PORT || 3000;
+const bodyParser = require('body-parser');
+const Database   = require('./lib/database');
 
 app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.locals.title = 'Real Time';
+
+app.set('view engine', 'jade');
+
+var database = new Database
+app.locals.polls = {};
 
 app.get('/', function (req, res){
-  res.sendFile(__dirname + '/public/index.html');
+  res.render('index');
 });
 
-const port = process.env.PORT || 3000;
+app.post('/', function (req, res) {
+  if (!req.body.poll) { return res.sendStatus(400); }
+  var poll = database.createPoll(req.body.poll);
+  app.locals.polls[1] = poll;
+  res.sendStatus(201);
+  // response.redirect('/' + poll.adminUrl);
+});
 
 const server = http.createServer(app)
-                 .listen(port, function () {
-                    console.log('Listening on port ' + port + '.');
-                  });
+
+if(!module.parent) {
+  server.listen(port, () => {
+    console.log(`${app.locals.title} is running on port ${port}.`);
+  });
+}
 
 const socketIo = require('socket.io');
 const io = socketIo(server);
@@ -30,4 +50,4 @@ io.on('connection', function (socket) {
   });
 });
 
-module.exports = server;
+module.exports = app;
