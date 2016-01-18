@@ -1,6 +1,13 @@
 doctype html
 html(lang="en")
   head
-    title=title
+    title= title
   body
     h1= title
+    div.poll
+      form(name="pollParams", action="/", method="post")
+        input(type="text", name="poll[question]", placeholder="Question or Poll Title")
+        br
+        input(type="text", name="poll[answers]", placeholder="Possible Answer")
+        br
+        input(type="submit", value="Create Poll")
