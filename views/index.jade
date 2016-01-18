@@ -8,6 +8,17 @@ html(lang="en")
       form(name="pollParams", action="/", method="post")
         input(type="text", name="poll[question]", placeholder="Question or Poll Title")
         br
-        input(type="text", name="poll[answers]", placeholder="Possible Answer")
+        input(type="text", name="poll[answers]", placeholder="Possible Answer 1")
+        br
+        input(type="text", name="poll[answers]", placeholder="Possible Answer 2")
+        br
+        input(type="text", name="poll[answers]", placeholder="Possible Answer 3")
+        br
+        button(class="btn", data-action="add-answer").
+          Add Additional Answer
+        br
+        label
+          input(type="checkbox", name="poll[visible]")
+          | Do you want these results to be public?
         br
         input(type="submit", value="Create Poll")
