@@ -1,6 +1,7 @@
-const assert  = require('assert');
-const app     = require('../server');
-const request = require('request');
+const assert   = require('assert');
+const app      = require('../server');
+const request  = require('request');
+const fixtures = require('./fixtures');
 
 describe('Server', () => {
 
@@ -62,17 +63,12 @@ describe('Server', () => {
       });
     });
 
-    it('should recieve and store data', (done) => {
-      var poll = {
-        poll: {
-          question: "Does this work?",
-          answers: ["a", "b"]
-        }
-      };
+    it('should receive and store data', (done) => {
+      var payload = { poll: fixtures.validPoll };
 
-      this.request.post('/', { form: poll }, (error, response) => {
+      this.request.post('/', { form: payload }, (error, response) => {
         if (error) { done(error); }
-        var pollCount = Object.keys(app.database).length;
+        var pollCount = Object.keys(app.locals.polls).length;
         assert.equal(pollCount, 1, 'Expected 1 poll, found ${pollCount}');
         done();
       });
