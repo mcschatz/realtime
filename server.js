@@ -5,8 +5,6 @@ const port       = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const Database   = require('./lib/database');
 
-app.use(express.static('public'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.locals.title = 'Real Time';
@@ -14,7 +12,6 @@ app.locals.title = 'Real Time';
 app.set('view engine', 'jade');
 
 var database = new Database
-app.locals.polls = {};
 
 app.get('/', function (req, res){
   res.render('index');
@@ -23,9 +20,12 @@ app.get('/', function (req, res){
 app.post('/', function (req, res) {
   if (!req.body.poll) { return res.sendStatus(400); }
   var poll = database.createPoll(req.body.poll);
-  app.locals.polls[1] = poll;
-  res.sendStatus(201);
-  // response.redirect('/' + poll.adminUrl);
+  res.redirect('/admin/' + poll.adminUrl);
+});
+
+app.get('/admin/:id', function (req, res) {
+  var poll = database.findPoll(res.req.params.id);
+  res.render('admin', { poll: poll });
 });
 
 const server = http.createServer(app)

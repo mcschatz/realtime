@@ -68,8 +68,7 @@ describe('Server', () => {
 
       this.request.post('/', { form: payload }, (error, response) => {
         if (error) { done(error); }
-        var pollCount = Object.keys(app.locals.polls).length;
-        assert.equal(pollCount, 1, 'Expected 1 poll, found ${pollCount}');
+        assert.equal(response.statusCode, 302);
         done();
       });
     });
