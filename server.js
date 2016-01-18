@@ -5,8 +5,6 @@ const port       = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const Database   = require('./lib/database');
 
-app.use(express.static('public'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.locals.title = 'Real Time';
@@ -25,8 +23,9 @@ app.post('/', function (req, res) {
   res.redirect('/admin/' + poll.adminUrl);
 });
 
-app.get('/admin/:id', function(request, response) {
-  response.render('admin')
+app.get('/admin/:id', function (req, res) {
+  var poll = database.findPoll(res.req.params.id);
+  res.render('admin', { poll: poll });
 });
 
 const server = http.createServer(app)
