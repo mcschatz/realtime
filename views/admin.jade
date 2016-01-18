@@ -1,1 +1,13 @@
-You made it
+h3 Thank you for creating a poll! Please find your details below.
+
+p
+  | Poll Url:
+  a(href="poll.pollUrl") poll.pollUrl
+p
+  | Admin Url:
+  a(href="poll.adminUrl") poll.adminUrl
+
+  h5= poll.pollUrl
+  h5= poll.question
+  h5= poll.answers
+  h5= poll.publicView
