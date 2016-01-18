@@ -25,6 +25,10 @@ app.post('/', function (req, res) {
   res.redirect('/admin/' + poll.adminUrl);
 });
 
+app.get('/admin/:id', function(request, response) {
+  response.render('admin')
+});
+
 const server = http.createServer(app)
 
 if(!module.parent) {
