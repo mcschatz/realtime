@@ -10,28 +10,43 @@ describe('polls', function () {
     assert.isObject(poll);
   });
 
-  // it('should be associated with a game', function () {
-  //   let poll = new Poll(this.game, {x: 100, y: 50} );
-  //   assert.equal(poll.game, this.game);
-  // });
+  it('should have options', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.options[0], 'mushrooms');
+  });
 
-  // it('should have a position consisting of an x cord', function () {
-  //   let poll = new Poll(this.game, {x: 100, y: 50} );
-  //   assert.equal(poll.position.x, 100);
-  // });
+  it('should have a question', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.question, 'What toppings do you want?');
+  });
 
-  // it('should have a position consisting of an y cord', function () {
-  //   let poll = new Poll(this.game, {x: 100, y: 50} );
-  //   assert.equal(poll.position.y, 50);
-  // });
+  it('should have an adminUrl', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.adminUrl, 1);
+  });
 
-  // it('should have status of defaulting to one', function () {
-  //   let poll = new Poll(this.game, {x: 100, y: 50} );
-  //   assert.equal(poll.status, 1);
-  // });
+  it('should have a pollUrl', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.pollUrl, 2);
+  });
 
-  // it('should have draw method', function () {
-  //   let poll = new Poll(this.game, {x: 100, y: 50} );
-  //   assert.ok(poll.draw);
-  // });
+  it('should have votes', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.votes['black olives'], 3);
+  });
+
+  it('should have a view status', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.publicView, 'true');
+  });
+
+  it('should have status', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.status, 'Open');
+  });
+
+  it('could have a setTimeout', function () {
+    var poll = fixtures.validPoll;
+    assert.equal(poll.setTimeout, 5000);
+  });
 });
