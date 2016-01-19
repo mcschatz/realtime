@@ -42,7 +42,9 @@ app.get('/poll/:id', function (req, res) {
 app.post('/poll/:id/vote', function(req, res) {
   database.addVote(req.params.id, req.body.vote);
   var room = database.findUserPoll(req.params.id).adminUrl;
+  var user = database.findUserPoll(req.params.id).pollUrl;
   io.to(room).emit('vote', req.body.vote);
+  io.to(user).emtt('vote', req.body.vote);
   res.send(204);
 });
 
@@ -60,6 +62,11 @@ io.on('connection', function (socket) {
   const adminPollId = socket.handshake.query.adminPollId;
   if (adminPollId) {
     socket.join(adminPollId);
+  }
+
+  const userPollId = socket.handshake.query.userPollId;
+  if (userPollId) {
+    socket.join(userPollId);
   }
 
   socket.on('disconnect', function () {
