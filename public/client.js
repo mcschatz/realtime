@@ -1,4 +1,5 @@
 var adminPollId = window.location.pathname.match(/\/admin\/(.*)/);
+var addOption = document.getElementById('add-option');
 
 if (adminPollId) {
   var socket = io({ query: 'adminPollId=' + adminPollId[1] });
@@ -12,6 +13,17 @@ if (adminPollId) {
   });
 }
 
+if (addOption) {
+  addOption.addEventListener('click', addInput);
+}
+
+function addInput(event) {
+  event.preventDefault();
+  var newInput = document.createElement('div');
+  newInput.innerHTML = `<input id='poll-option' type='text' placeholder='Response Option' name="poll[options]">`;
+  $('.poll-options').append(newInput);
+}
+
 $('.option').on('click', function() {
   var pollId = window.location.pathname.match(/\/poll\/(.*)/)[1];
   $.ajax({
@@ -20,4 +32,3 @@ $('.option').on('click', function() {
     data: { vote: $(this).text() }
   });
 });
-

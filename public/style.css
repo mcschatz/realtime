@@ -16,3 +16,15 @@
 .container {
   text-align: center;
 }
+
+#create-poll {
+  margin-left: 10px;
+}
+
+#title {
+  text-align: center;
+}
+
+.vote-tally {
+  margin-left: 32em;
+}
