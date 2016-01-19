@@ -1,7 +1,6 @@
 var adminPollId = window.location.pathname.match(/\/admin\/(.*)/);
 var userPollId = window.location.pathname.match(/\/poll\/(.*)/);
 var addOption = document.getElementById('add-option');
-var socket = io();
 
 if (adminPollId) {
   var socket = io({ query: 'adminPollId=' + adminPollId[1] });
@@ -32,6 +31,7 @@ if (addOption) {
 }
 
 $('#close').on('click', function() {
+  var socket = io();//
   socket.send('closed-poll', this.value);
 });
 
