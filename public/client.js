@@ -5,12 +5,12 @@ var addOption = document.getElementById('add-option');
 if (adminPollId) {
   var socket = io({ query: 'adminPollId=' + adminPollId[1] });
   socket.on('vote', function (data) {
-    var $vote = $('.results-admin ul li').filter(function () {
+    var $vote = $('.results ul li').filter(function () {
       return $(this).data('key') === data
     })
-    var voteCount = Number($vote.find('.tally').text());
+    var voteCount = Number($vote.find('.vote-tally').text());
     voteCount += 1;
-    $vote.find('.tally').text(voteCount);
+    $vote.find('.vote-tally').text(voteCount);
   });
 }
 
@@ -20,9 +20,9 @@ if (userPollId) {
     var $vote = $('.results ul li').filter(function () {
       return $(this).data('key') === data
     })
-    var voteCount = Number($vote.find('.tally').text());
+    var voteCount = Number($vote.find('.vote-tally').text());
     voteCount += 1;
-    $vote.find('.tally').text(voteCount);
+    $vote.find('.vote-tally').text(voteCount);
   });
 }
 
