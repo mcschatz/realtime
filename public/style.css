@@ -26,5 +26,18 @@
 }
 
 .vote-tally {
-  margin-left: 32em;
+  margin-left: 24em;
+  font-size: 20px;
+}
+
+#url {
+  text-align: center;
+}
+
+.results {
+  margin-left: 29em;
+}
+
+.admin-tally {
+  vertical-align: baseline;
 }
