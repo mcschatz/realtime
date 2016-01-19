@@ -1,22 +1,21 @@
 extends ./layout
 
 block content
-  h3 Thank you for creating a poll! Please find your details below.
+  h2#title Thank you for creating a poll! Your details are below.
 
-  p
-    | Poll Url:
+  p#url
+    | Poll url to share:
     a(href="/poll/" + "#{poll.pollUrl}") /poll/#{poll.pollUrl}
-  p
-    | Admin Url:
+  p#url
+    | Admin url:
     a(href="/admin/" + "#{poll.adminUrl}") /admin/#{poll.adminUrl}
-
-    h5= poll.pollUrl
-    h5= poll.question
-    h5= poll.answers
-    h5= poll.publicView
-
-  .admin-results
-    ul
-      each tally, vote in poll.votes
-        li(data-key=vote)= vote + ': '
-          span.tally= tally
+  br
+  .results-admin
+    h2 Current Results
+    h4= 'Poll Topic: ' + poll.question
+    h4= 'Poll is public: ' + poll.publicView
+    .admin-tally
+      ul
+        each tally, vote in poll.votes
+          li(data-key=vote)= vote + ': '
+            span.tally= tally

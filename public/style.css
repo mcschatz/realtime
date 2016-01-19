@@ -16,3 +16,67 @@
 .container {
   text-align: center;
 }
+
+#title {
+  text-align: center;
+}
+
+.vote-tally {
+  margin-left: 24em;
+  font-size: 20px;
+}
+
+#url {
+  text-align: center;
+}
+
+.results-admin {
+  margin-left: 29em;
+}
+
+.admin-tally {
+  vertical-align: baseline;
+}
+
+.poll-params {
+  text-align: center;
+}
+
+.poll-options {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  line-height: 2em;
+}
+
+#add-option {
+  width: 20em;
+  height: 2em;
+  background: #00BCD4;
+  border-radius: 2px;
+  line-height: 2em;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#add-option:hover {
+  background: rgba(0, 188, 212, 0.5);
+}
+
+#create-poll {
+  width: 20em;
+  height: 2em;
+  background: #00BCD4;
+  border-radius: 2px;
+  line-height: 2em;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#create-poll:hover {
+  background: rgba(0, 188, 212, 0.5);
+}

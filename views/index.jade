@@ -1,7 +1,7 @@
 extends ./layout
 
 block content
-  h2 Real Time
+  h1#title Real Time
   .poll-params
     form(name="pollParams", action="/", method="post")
       .poll-options
@@ -12,12 +12,13 @@ block content
         input(#poll-option, type="text", name="poll[options]", placeholder="Response Option")
         br
         input(#poll-option, type="text", name="poll[options]", placeholder="Response Option")
-        br
       button#add-option.
-        Add Additional Answers
-        br
+        Add Additional Responses
+      br
+      br
       label
         input(type="checkbox", name="poll[visible]", value="true")
         | Do you want these results to be public?
+      br
+      br
       input#create-poll(type="submit", value="Create Poll")
-  br
