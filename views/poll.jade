@@ -1,17 +1,20 @@
 extends ./layout
 
 block content
-  h2#title Please read the question and select one response
-  h4#title= 'Question: ' + poll.question
-  .container
-    for option in poll.options
-      .option= option
-  br
-  .results
-    h2#title Current Results
-    .vote-tally
-      if poll.publicView == true
-      ul
-        each tally, vote in poll.votes
-          li(data-key=vote)= vote + ': '
-            span.tally= tally
+  if poll.status === "open"
+    h2#title Please read the question and select one response
+    h4#title= 'Question: ' + poll.question
+    .container
+      for option in poll.options
+        .option= option
+    br
+    .results
+      h2#title Current Results
+      .vote-tally
+        if poll.publicView == true
+        ul
+          each tally, vote in poll.votes
+            li(data-key=vote)= vote + ': '
+              span.tally= tally
+  else
+    h1#title This poll is closed! Sorry.

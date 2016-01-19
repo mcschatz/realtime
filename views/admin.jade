@@ -14,6 +14,10 @@ block content
     h2 Current Results
     h4= 'Poll Topic: ' + poll.question
     h4= 'Poll is public: ' + poll.publicView
+    .close-poll
+      h4= 'Poll is: ' + poll.status
+      button(id="close", value= poll.adminUrl).
+        Close Poll
     .admin-tally
       ul
         each tally, vote in poll.votes
