@@ -15,10 +15,12 @@ block content
       button#add-option.
         Add Additional Responses
       br
+      input(#set-closeout, type="number", name="poll[setTimeout]", placeholder="Min. to Poll Closes")
+      br
       br
       label
         input(type="checkbox", name="poll[visible]", value="true")
-        | Do you want these results to be public?
+        | Check to make results to be public?
       br
       br
       input#create-poll(type="submit", value="Create Poll")
