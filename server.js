@@ -69,6 +69,13 @@ io.on('connection', function (socket) {
     socket.join(userPollId);
   }
 
+  socket.on('message', function (channel, message) {
+    if (channel === 'closed-poll') {
+      database.updateStatus(message);
+      io.sockets.emit(channel, message);
+    }
+  });
+
   socket.on('disconnect', function () {
     console.log('A user has disconnected.', io.engine.clientsCount);
     io.sockets.emit('usersConnected', io.engine.clientsCount);
