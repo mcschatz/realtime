@@ -1,11 +1,17 @@
 const http       = require('http');
 const express    = require('express');
 const app        = express();
+const server     = http.createServer(app)
 const port       = process.env.PORT || 3000;
+const path       = require('path');
 const bodyParser = require('body-parser');
 const Database   = require('./lib/database');
+const socketIo   = require('socket.io');
+const io         = socketIo(server);
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.locals.title = 'Real Time';
 
@@ -28,7 +34,17 @@ app.get('/admin/:id', function (req, res) {
   res.render('admin', { poll: poll });
 });
 
-const server = http.createServer(app)
+app.get('/poll/:id', function (req, res) {
+  var poll = database.findUserPoll(req.params.id);
+  res.render('poll', { poll: poll });
+});
+
+app.post('/poll/:id/vote', function(req, res) {
+  database.addVote(req.params.id, req.body.vote);
+  var room = database.findUserPoll(req.params.id).adminUrl;
+  io.to(room).emit('vote', req.body.vote);
+  res.send(204);
+});
 
 if(!module.parent) {
   server.listen(port, () => {
@@ -36,13 +52,15 @@ if(!module.parent) {
   });
 }
 
-const socketIo = require('socket.io');
-const io = socketIo(server);
-
 io.on('connection', function (socket) {
   console.log('A user has connected.', io.engine.clientsCount);
 
   io.sockets.emit('usersConnected', io.engine.clientsCount);
+
+  const adminPollId = socket.handshake.query.adminPollId;
+  if (adminPollId) {
+    socket.join(adminPollId);
+  }
 
   socket.on('disconnect', function () {
     console.log('A user has disconnected.', io.engine.clientsCount);
