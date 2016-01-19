@@ -8,11 +8,11 @@ html(lang="en")
       form(name="pollParams", action="/", method="post")
         input(type="text", name="poll[question]", placeholder="Question or Poll Title")
         br
-        input(type="text", name="poll[answers]", placeholder="Possible Answer 1")
+        input(type="text", name="poll[options]", placeholder="Possible Answer 1")
         br
-        input(type="text", name="poll[answers]", placeholder="Possible Answer 2")
+        input(type="text", name="poll[options]", placeholder="Possible Answer 2")
         br
-        input(type="text", name="poll[answers]", placeholder="Possible Answer 3")
+        input(type="text", name="poll[options]", placeholder="Possible Answer 3")
         br
         button(class="btn", data-action="add-answer").
           Add Additional Answer

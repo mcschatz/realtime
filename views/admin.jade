@@ -1,13 +1,22 @@
-h3 Thank you for creating a poll! Please find your details below.
+extends ./layout
 
-p
-  | Poll Url:
-  a(href="poll.pollUrl") poll.pollUrl
-p
-  | Admin Url:
-  a(href="poll.adminUrl") poll.adminUrl
+block content
+  h3 Thank you for creating a poll! Please find your details below.
 
-  h5= poll.pollUrl
-  h5= poll.question
-  h5= poll.answers
-  h5= poll.publicView
+  p
+    | Poll Url:
+    a(href="/poll/" + "#{poll.pollUrl}") /poll/#{poll.pollUrl}
+  p
+    | Admin Url:
+    a(href="/admin/" + "#{poll.adminUrl}") /admin/#{poll.adminUrl}
+
+    h5= poll.pollUrl
+    h5= poll.question
+    h5= poll.answers
+    h5= poll.publicView
+
+  .admin-results
+    ul
+      each tally, vote in poll.votes
+        li(data-key=vote)= vote + ': '
+          span.tally= tally
