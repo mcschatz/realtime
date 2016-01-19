@@ -1,24 +1,23 @@
-doctype html
-html(lang="en")
-  head
-    title= title
-  body
-    h1= title
-    div.poll
-      form(name="pollParams", action="/", method="post")
-        input(type="text", name="poll[question]", placeholder="Question or Poll Title")
+extends ./layout
+
+block content
+  h2 Real Time
+  .poll-params
+    form(name="pollParams", action="/", method="post")
+      .poll-options
+        input(#poll-option, type="text", name="poll[question]", placeholder="Question or Poll Title")
         br
-        input(type="text", name="poll[options]", placeholder="Possible Answer 1")
+        input(#poll-option, type="text", name="poll[options]", placeholder="Response Option")
         br
-        input(type="text", name="poll[options]", placeholder="Possible Answer 2")
+        input(#poll-option, type="text", name="poll[options]", placeholder="Response Option")
         br
-        input(type="text", name="poll[options]", placeholder="Possible Answer 3")
+        input(#poll-option, type="text", name="poll[options]", placeholder="Response Option")
         br
-        button(class="btn", data-action="add-answer").
-          Add Additional Answer
+      button#add-option.
+        Add Additional Answers
         br
-        label
-          input(type="checkbox", name="poll[visible]")
-          | Do you want these results to be public?
-        br
-        input(type="submit", value="Create Poll")
+      label
+        input(type="checkbox", name="poll[visible]", value="true")
+        | Do you want these results to be public?
+      input#create-poll(type="submit", value="Create Poll")
+  br
