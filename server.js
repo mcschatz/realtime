@@ -41,10 +41,13 @@ app.get('/poll/:id', function (req, res) {
 
 app.post('/poll/:id/vote', function(req, res) {
   database.addVote(req.params.id, req.body.vote);
+
   var admin = database.findUserPoll(req.params.id).adminUrl;
   var user = database.findUserPoll(req.params.id).pollUrl;
+
   io.to(admin).emit('vote', req.body.vote);
   io.to(user).emit('vote', req.body.vote);
+
   res.send(204);
 });
 
@@ -61,13 +64,11 @@ io.on('connection', function (socket) {
 
   const adminPollId = socket.handshake.query.adminPollId;
   if (adminPollId) {
-    console.log(adminPollId);
     socket.join(adminPollId);
   }
 
   const userPollId = socket.handshake.query.userPollId;
   if (userPollId) {
-    console.log(userPollId);
     socket.join(userPollId);
   }
 
