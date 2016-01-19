@@ -41,10 +41,10 @@ app.get('/poll/:id', function (req, res) {
 
 app.post('/poll/:id/vote', function(req, res) {
   database.addVote(req.params.id, req.body.vote);
-  var room = database.findUserPoll(req.params.id).adminUrl;
+  var admin = database.findUserPoll(req.params.id).adminUrl;
   var user = database.findUserPoll(req.params.id).pollUrl;
-  io.to(room).emit('vote', req.body.vote);
-  io.to(user).emtt('vote', req.body.vote);
+  io.to(admin).emit('vote', req.body.vote);
+  io.to(user).emit('vote', req.body.vote);
   res.send(204);
 });
 
