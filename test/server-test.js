@@ -63,7 +63,7 @@ describe('Server', () => {
       });
     });
 
-    it('should receive and store data', (done) => {
+    it('should receive data and redirect the user', (done) => {
       var payload = { poll: fixtures.validPoll };
 
       this.request.post('/', { form: payload }, (error, response) => {

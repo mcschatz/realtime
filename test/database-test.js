@@ -6,6 +6,10 @@ const Poll = require('../lib/poll');
 const fixtures = require('./fixtures');
 
 describe('databases', function () {
+  beforeEach(function() {
+    this.database = new Database();
+  });
+
   it('should instatiate a new database', function () {
     var database = new Database;
     assert.isObject(database);
@@ -34,10 +38,13 @@ describe('databases', function () {
   it('should add a vote', function () {
     var database = new Database;
     var poll = new Poll(fixtures.validPoll);
+
     assert.equal(poll.votes['mushrooms'], 0);
+
     database.polls[poll.adminUrl] = poll
     database.addVote(poll.pollUrl, 'mushrooms' );
     var found = database.findUserPoll(poll.pollUrl);
+
     assert.equal(found.votes['mushrooms'], 1);
   });
 });
