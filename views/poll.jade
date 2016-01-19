@@ -1,0 +1,8 @@
+extends ./layout
+
+h5= poll.question
+
+block content
+  .container
+    for option in poll.options
+      .option= option
