@@ -61,11 +61,13 @@ io.on('connection', function (socket) {
 
   const adminPollId = socket.handshake.query.adminPollId;
   if (adminPollId) {
+    console.log(adminPollId);
     socket.join(adminPollId);
   }
 
   const userPollId = socket.handshake.query.userPollId;
   if (userPollId) {
+    console.log(userPollId);
     socket.join(userPollId);
   }
 
